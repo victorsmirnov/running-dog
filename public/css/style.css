@@ -1,0 +1,13 @@
+@import "reset.css";
+
+body {
+    background: black;
+    color: white;
+    display: flex;
+}
+
+#canvas1 {
+    margin: auto;
+    /*max-width: 100%;
+    max-height: 100%;*/
+}
