@@ -4,28 +4,19 @@ import { Player } from './player/player.js'
 import { FlyingEnemy } from './enemies/flying-enemy.js'
 import { GroundEnemy } from './enemies/ground-enemy.js'
 import { ClimbingEnemy } from './enemies/climbing-enemy.js'
+import { Score } from './ui/score.js'
 
 export class Game {
-  debugMode = false
-
-  gamePaused = false
-
-  gameOver = false
-
-  gameScore = 0
-
-  gameSpeed = 0
-
-  gameMaxSpeed = 5
-
-  groundMargin = 50
-
-  enemies = []
-
-  enemyNextTime = 0
-
   constructor (assets) {
     this.assets = assets
+
+    this.debugMode = false
+    this.gamePaused = false
+    this.gameOver = false
+    this.gameScore = 0
+    this.gameSpeed = 0
+    this.gameMaxSpeed = 5
+    this.groundMargin = 50
 
     this.canvas = document.getElementById('canvas1')
     this.canvas.width = window.innerWidth // 1400 // parseInt(getComputedStyle(this.canvas).width)
@@ -34,12 +25,14 @@ export class Game {
 
     this.gameWidth = this.canvas.width
     this.gameHeight = this.canvas.height
+    this.fontColor = 'white'
 
     this.input = new InputHandler()
-
     this.player = new Player(this)
-
+    this.enemies = []
+    this.enemyNextTime = 0
     this.background = new Background(this)
+    this.scoreUI = new Score(this)
   }
 
   setSpeed (speed) {
@@ -74,9 +67,8 @@ export class Game {
 
   update (timestamp) {
     this.background.update()
-    this.updateEnemies(timestamp)
     this.player.update(timestamp)
-    this.processCollisions()
+    this.updateEnemies(timestamp)
   }
 
   draw (context) {
@@ -86,14 +78,9 @@ export class Game {
     this.player.draw(context)
     this.enemies.forEach((enemy) => enemy.draw(context))
 
+    this.scoreUI.draw(context)
     this.displayStatusText(context)
     if (this.debugMode) this.displayDebugText(context)
-  }
-
-  processCollisions () {
-    const playerShape = this.player.getCollisionShape()
-    const collides = (enemy) => playerShape.collides(enemy.getCollisionShape())
-    if (this.enemies.find(collides) !== undefined) this.gameOver = true
   }
 
   updateEnemies (timestamp) {
@@ -103,6 +90,12 @@ export class Game {
     }
 
     this.enemies.forEach((enemy) => enemy.update(timestamp))
+
+    const playerShape = this.player.getCollisionShape()
+    this.enemies
+      .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
+      .forEach((enemy) => enemy.markForDeletion = true)
+
     this.gameScore += this.enemies.filter((enemy) => enemy.markForDeletion).length
     this.enemies = this.enemies.filter((enemy) => !enemy.markForDeletion)
   }
@@ -114,14 +107,6 @@ export class Game {
   }
 
   displayStatusText (context) {
-    context.textAlign = 'left'
-    context.fillStyle = 'black'
-    context.font = '40px Helvetica'
-    context.fillText(`Score: ${this.gameScore}`, 20, 50)
-    context.fillStyle = 'white'
-    context.font = '40px Helvetica'
-    context.fillText(`Score: ${this.gameScore}`, 22, 52)
-
     if (this.gameOver) {
       context.textAlign = 'center'
       context.fillStyle = 'black'

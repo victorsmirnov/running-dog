@@ -5,7 +5,8 @@ export const
   JUMPING_ANIMATION = 1,
   FALLING_ANIMATION = 2,
   RUNNING_ANIMATION = 3,
-  SITTING_ANIMATION = 5
+  SITTING_ANIMATION = 5,
+  ROLLING_ANIMATION = 6
 
 export class PlayerSprite extends Sprite {
   constructor (assets) {

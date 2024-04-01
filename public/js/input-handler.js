@@ -1,6 +1,8 @@
 export class InputHandler {
   constructor () {
-    this.listenKeys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'd', 'p']
+    this.listenKeys = [
+      'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter',
+      ' ', 'd', 'p']
     this.keys = []
     this.touchY = 0
     this.touchThreshold = 15

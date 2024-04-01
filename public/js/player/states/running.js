@@ -1,5 +1,5 @@
 import { State } from './state.js'
-import { JUMPING_STATE, SITTING_STATE } from './states.js'
+import { JUMPING_STATE, ROLLING_STATE, SITTING_STATE } from './states.js'
 import { RUNNING_ANIMATION } from '../player-sprite.js'
 
 export class Running extends State {
@@ -11,10 +11,13 @@ export class Running extends State {
     this.player.game.setSpeed(1)
   }
 
-  handleInput (input) {
-    if (input.isKeyPressed('ArrowUp')) this.player.setState(JUMPING_STATE)
-    if (input.isKeyPressed('ArrowDown')) this.player.setState(SITTING_STATE)
-    if (input.isKeyPressed('ArrowLeft')) this.player.speedX = -10
-    if (input.isKeyPressed('ArrowRight')) this.player.speedX = 10
+  get handlers () {
+    return {
+      ArrowUp: JUMPING_STATE,
+      ArrowDown: SITTING_STATE,
+      ArrowLeft: (player) => player.speedX = -10,
+      ArrowRight: (player) => player.speedX = 10,
+      Enter: ROLLING_STATE,
+    }
   }
 }
