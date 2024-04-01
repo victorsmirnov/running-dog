@@ -1,6 +1,16 @@
 export class State {
-  constructor (player) {
-    this.player = player
+  constructor (game) {
+    this.game = game
+  }
+
+  // When we create state, the game is not initialized yet,
+  // so we can not access the player object in constructor.
+  get player () {
+    return this.game.player
+  }
+
+  setGameSpeed (speed) {
+    this.game.setSpeed(speed)
   }
 
   get handlers () {

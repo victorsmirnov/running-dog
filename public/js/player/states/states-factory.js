@@ -6,13 +6,13 @@ import { Sitting } from './sitting.js'
 import { Standing } from './standing.js'
 import { FALLING_STATE, JUMPING_STATE, ROLLING_STATE, RUNNING_STATE, SITTING_STATE, STANDING_STATE } from './states.js'
 
-export function createStates (player) {
+export function createStates (game) {
   return {
-    [FALLING_STATE]: new Falling(player),
-    [JUMPING_STATE]: new Jumping(player),
-    [RUNNING_STATE]: new Running(player),
-    [ROLLING_STATE]: new Rolling(player),
-    [SITTING_STATE]: new Sitting(player),
-    [STANDING_STATE]: new Standing(player)
+    [FALLING_STATE]: new Falling(game),
+    [JUMPING_STATE]: new Jumping(game),
+    [RUNNING_STATE]: new Running(game),
+    [ROLLING_STATE]: new Rolling(game),
+    [SITTING_STATE]: new Sitting(game),
+    [STANDING_STATE]: new Standing(game)
   }
 }

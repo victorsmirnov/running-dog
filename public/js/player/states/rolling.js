@@ -5,7 +5,7 @@ import { ROLLING_ANIMATION } from '../player-sprite.js'
 export class Rolling extends State {
   enter () {
     this.player.sprite.chooseAnimation(ROLLING_ANIMATION)
-    this.player.game.setSpeed(2)
+    this.setGameSpeed(2)
   }
 
   get handlers () {

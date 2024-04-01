@@ -5,6 +5,7 @@ import { FlyingEnemy } from './enemies/flying-enemy.js'
 import { GroundEnemy } from './enemies/ground-enemy.js'
 import { ClimbingEnemy } from './enemies/climbing-enemy.js'
 import { Score } from './ui/score.js'
+import { STANDING_STATE } from './player/states/states.js'
 
 export class Game {
   constructor (assets) {
@@ -30,9 +31,13 @@ export class Game {
     this.input = new InputHandler()
     this.player = new Player(this)
     this.enemies = []
+    this.particles = []
     this.enemyNextTime = 0
     this.background = new Background(this)
     this.scoreUI = new Score(this)
+
+    // States depend on the game object, so can set player state only after the game object is fully initialized.
+    this.player.setState(STANDING_STATE)
   }
 
   setSpeed (speed) {
@@ -69,6 +74,7 @@ export class Game {
     this.background.update()
     this.player.update(timestamp)
     this.updateEnemies(timestamp)
+    this.updateParticles(timestamp)
   }
 
   draw (context) {
@@ -77,6 +83,7 @@ export class Game {
     this.background.draw(context)
     this.player.draw(context)
     this.enemies.forEach((enemy) => enemy.draw(context))
+    this.particles.forEach((particle) => particle.draw(context))
 
     this.scoreUI.draw(context)
     this.displayStatusText(context)
@@ -106,6 +113,11 @@ export class Game {
       this.enemies.push(
         Math.random() < 0.5 ? new GroundEnemy(this) : new ClimbingEnemy(this))
     }
+  }
+
+  updateParticles (timestamp) {
+    this.particles.forEach((particle) => particle.update())
+    this.particles = this.particles.filter((particle) => !particle.markForDeletion)
   }
 
   displayStatusText (context) {

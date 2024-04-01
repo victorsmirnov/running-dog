@@ -7,7 +7,7 @@ export class Player {
   constructor (game) {
     this.game = game
 
-    this.sprite = new PlayerSprite(this.game.assets)
+    this.sprite = new PlayerSprite(game.assets)
     this.width = this.sprite.frameWidth
     this.height = this.sprite.frameHeight
 
@@ -17,8 +17,8 @@ export class Player {
     this.speedY = 0
     this.weight = 1
 
-    this.states = createStates(this)
-    this.setState(STANDING_STATE)
+    this.states = createStates(game)
+    // We can not call the setState() method here because it expects game object fully initialized.
   }
 
   setState (state) {
