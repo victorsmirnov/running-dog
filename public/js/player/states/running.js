@@ -15,9 +15,9 @@ export class Running extends State {
     return {
       ArrowUp: JUMPING_STATE,
       ArrowDown: SITTING_STATE,
-      ArrowLeft: (player) => player.speedX = -10,
-      ArrowRight: (player) => player.speedX = 10,
-      Enter: ROLLING_STATE,
+      ArrowLeft: (player) => { player.speedX = -10 },
+      ArrowRight: (player) => { player.speedX = 10 },
+      Enter: ROLLING_STATE
     }
   }
 }

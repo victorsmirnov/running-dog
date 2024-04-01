@@ -17,7 +17,7 @@ export class Enemy {
     if (this.game.debugMode) this.getCollisionShape().draw(context, 'blue')
   }
 
-  getCollisionShape() {
+  getCollisionShape () {
     return new Polygon([
       [this.x, this.y],
       [this.x + this.width, this.y],

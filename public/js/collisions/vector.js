@@ -3,6 +3,7 @@ export class Vector {
     this.x = x
     this.y = y
   }
+
   sub (vector) {
     return new Vector(this.x - vector.x, this.y - vector.y)
   }

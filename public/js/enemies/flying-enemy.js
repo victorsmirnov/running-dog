@@ -22,7 +22,7 @@ export class FlyingEnemy extends Enemy {
     this.y += Math.sin(this.angle) * 2
   }
 
-  getCollisionShape() {
+  getCollisionShape () {
     return new Circle(
       this.x + this.width / 2,
       this.y + this.height / 2,

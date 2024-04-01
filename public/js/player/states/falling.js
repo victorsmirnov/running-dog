@@ -8,7 +8,9 @@ export class Falling extends State {
   }
 
   handleInput (input) {
-    if (this.player.onGround()) return this.player.setState(
-      this.player.game.gameSpeed === 0 ? STANDING_STATE : RUNNING_STATE)
+    if (this.player.onGround()) {
+      return this.player.setState(
+        this.player.game.gameSpeed === 0 ? STANDING_STATE : RUNNING_STATE)
+    }
   }
 }

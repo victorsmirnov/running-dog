@@ -1,5 +1,5 @@
 import { State } from './state.js'
-import { JUMPING_STATE, ROLLING_STATE, RUNNING_STATE, SITTING_STATE, STANDING_STATE } from './states.js'
+import { ROLLING_STATE, RUNNING_STATE, SITTING_STATE, STANDING_STATE } from './states.js'
 import { SITTING_ANIMATION } from '../player-sprite.js'
 
 export class Sitting extends State {
@@ -17,7 +17,7 @@ export class Sitting extends State {
       ArrowDown: SITTING_STATE,
       ArrowLeft: RUNNING_STATE,
       ArrowRight: RUNNING_STATE,
-      Enter: ROLLING_STATE,
+      Enter: ROLLING_STATE
     }
   }
 }

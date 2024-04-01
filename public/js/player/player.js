@@ -40,7 +40,7 @@ export class Player {
     if (this.game.debugMode) this.getCollisionShape().draw(context, 'pink')
   }
 
-  getCollisionShape() {
+  getCollisionShape () {
     return new Circle(
       this.x + this.width / 2 + 5,
       this.y + this.height / 2 + 5,

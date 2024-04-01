@@ -17,8 +17,10 @@ export class Rolling extends State {
   }
 
   handleInput (input) {
-    if (!input.isKeyPressed('Enter')) return this.player.setState(
-      this.player.onGround() ? RUNNING_STATE : FALLING_STATE)
+    if (!input.isKeyPressed('Enter')) {
+      return this.player.setState(
+        this.player.onGround() ? RUNNING_STATE : FALLING_STATE)
+    }
 
     // Enter key should be pressed to keep rolling!
     super.handleInput(input)

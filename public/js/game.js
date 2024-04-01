@@ -62,7 +62,7 @@ export class Game {
 
     if (this.gameOver && this.input.isKeyPressed(' ')) this.restart()
 
-    requestAnimationFrame((timestamp) => this.animate(timestamp))
+    window.requestAnimationFrame((timestamp) => this.animate(timestamp))
   }
 
   update (timestamp) {
@@ -94,7 +94,7 @@ export class Game {
     const playerShape = this.player.getCollisionShape()
     this.enemies
       .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
-      .forEach((enemy) => enemy.markForDeletion = true)
+      .forEach((enemy) => { enemy.markForDeletion = true })
 
     this.gameScore += this.enemies.filter((enemy) => enemy.markForDeletion).length
     this.enemies = this.enemies.filter((enemy) => !enemy.markForDeletion)
@@ -102,8 +102,10 @@ export class Game {
 
   addEnemy () {
     this.enemies.push(new FlyingEnemy(this))
-    if (this.gameSpeed > 0) this.enemies.push(
-      Math.random() < 0.5 ? new GroundEnemy(this) : new ClimbingEnemy(this))
+    if (this.gameSpeed > 0) {
+      this.enemies.push(
+        Math.random() < 0.5 ? new GroundEnemy(this) : new ClimbingEnemy(this))
+    }
   }
 
   displayStatusText (context) {

@@ -12,6 +12,5 @@ export class Score {
     context.fillText(`Score: ${this.game.gameScore}`, 20, 50)
     context.fillStyle = this.game.fontColor
     context.fillText(`Score: ${this.game.gameScore}`, 22, 52)
-
   }
 }

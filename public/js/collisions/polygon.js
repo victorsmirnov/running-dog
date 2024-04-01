@@ -1,6 +1,6 @@
 import { Vector } from './vector.js'
 import { Projection } from './projection.js'
-import { doCirclePolygonCollide, doCirclesCollide, doPolygonsCollide } from './colliders.js'
+import { doCirclePolygonCollide, doPolygonsCollide } from './colliders.js'
 import { Circle } from './circle.js'
 
 export class Polygon {
@@ -34,7 +34,7 @@ export class Polygon {
     let max = min
 
     for (const vertex of this.vertices.slice(1)) {
-      let p = axis.dot(vertex)
+      const p = axis.dot(vertex)
       if (p < min) min = p
       if (p > max) max = p
     }
@@ -42,7 +42,7 @@ export class Polygon {
     return new Projection(min, max)
   }
 
-  draw(context, color = 'pink') {
+  draw (context, color = 'pink') {
     context.beginPath()
     context.moveTo(this.vertices[0].x, this.vertices[0].y)
     for (let i = 1; i < this.vertices.length; i++) {

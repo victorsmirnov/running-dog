@@ -7,10 +7,10 @@ export class Background {
     this.game = game
 
     this.layers = [
-      new Layer(this.game.assets['layer-1'], .2),
-      new Layer(this.game.assets['layer-2'], .4),
-      new Layer(this.game.assets['layer-3'], .6),
-      new Layer(this.game.assets['layer-4'], .8),
+      new Layer(this.game.assets['layer-1'], 0.2),
+      new Layer(this.game.assets['layer-2'], 0.4),
+      new Layer(this.game.assets['layer-3'], 0.6),
+      new Layer(this.game.assets['layer-4'], 0.8),
       new Layer(this.game.assets['layer-5'], 1)
     ]
   }
