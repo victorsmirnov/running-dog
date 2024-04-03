@@ -16,7 +16,8 @@ export async function loadAssets () {
     loadAsset('layer-3', 'assets/forest-3.png'),
     loadAsset('layer-4', 'assets/forest-4.png'),
     loadAsset('layer-5', 'assets/forest-5.png'),
-    loadAsset('player', 'assets/player.png')
+    loadAsset('player', 'assets/player.png'),
+    loadAsset('fire', 'assets/fire.png')
   ])
 
   return assets

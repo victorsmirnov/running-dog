@@ -1,26 +1,22 @@
 import { State } from './state.js'
-import { DIVING_STATE, FALLING_STATE, RUNNING_STATE } from './states.js'
+import { ROLLING_STATE, RUNNING_STATE } from './states.js'
 import { ROLLING_ANIMATION } from '../player-sprite.js'
 
-export class Rolling extends State {
+export class Diving extends State {
   enter () {
+    this.player.speedY = 15
     this.setPlayerAnimation(ROLLING_ANIMATION)
-    this.setGameSpeed(2)
+    this.setGameSpeed(0)
   }
 
   get handlers () {
-    return {
-      ArrowDown: DIVING_STATE,
-      ArrowUp: (player) => {
-        if (player.onGround()) player.speedY = -27
-      }
-    }
+    return {}
   }
 
   handleInput (input) {
-    if (!input.isKeyPressed('Enter')) {
-      return this.player.setState(
-        this.player.onGround() ? RUNNING_STATE : FALLING_STATE)
+    if (this.player.onGround()) {
+      this.player.setState(
+        input.isKeyPressed('Enter') ? ROLLING_STATE : RUNNING_STATE)
     }
 
     // I don't like fire particles as it is now.

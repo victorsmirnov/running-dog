@@ -8,7 +8,7 @@ export class Running extends State {
     this.player.y = this.player.game.gameHeight - this.player.height
     this.player.speedX = 0
     this.player.speedY = 0
-    this.player.sprite.chooseAnimation(RUNNING_ANIMATION)
+    this.setPlayerAnimation(RUNNING_ANIMATION)
     this.setGameSpeed(1)
   }
 

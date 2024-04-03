@@ -26,6 +26,12 @@ export class Player {
     this.state.enter()
   }
 
+  inState (states) {
+    if (typeof states === 'string') return this.state === this.states[states]
+
+    return states.find((state) => this.state === this.states[state]) !== undefined
+  }
+
   restart () {
     this.x = this.game.gameWidth / 4 - this.width / 2
     this.y = this.groundY()

@@ -5,7 +5,7 @@ import { FlyingEnemy } from './enemies/flying-enemy.js'
 import { GroundEnemy } from './enemies/ground-enemy.js'
 import { ClimbingEnemy } from './enemies/climbing-enemy.js'
 import { Score } from './ui/score.js'
-import { STANDING_STATE } from './player/states/states.js'
+import { DIVING_STATE, HIT_STATE, ROLLING_STATE, STANDING_STATE } from './player/states/states.js'
 
 export class Game {
   constructor (assets) {
@@ -98,13 +98,27 @@ export class Game {
 
     this.enemies.forEach((enemy) => enemy.update(timestamp))
 
-    const playerShape = this.player.getCollisionShape()
-    this.enemies
-      .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
-      .forEach((enemy) => { enemy.markForDeletion = true })
+    this.checkCollisions()
 
     this.gameScore += this.enemies.filter((enemy) => enemy.markForDeletion).length
     this.enemies = this.enemies.filter((enemy) => !enemy.markForDeletion)
+  }
+
+  checkCollisions () {
+    const playerShape = this.player.getCollisionShape()
+    const collideWith = this.enemies
+      .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
+    if (collideWith.length > 0) this.playerCollidesWithEnemy()
+
+    collideWith.forEach((enemy) => { enemy.markForDeletion = true })
+  }
+
+  playerCollidesWithEnemy () {
+    if (this.player.inState([ROLLING_STATE, DIVING_STATE])) {
+      this.gameScore++
+    } else {
+      this.player.setState(HIT_STATE)
+    }
   }
 
   addEnemy () {

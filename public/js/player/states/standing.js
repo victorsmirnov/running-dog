@@ -4,8 +4,7 @@ import { STANDING_ANIMATION } from '../player-sprite.js'
 
 export class Standing extends State {
   enter () {
-    console.dir(this)
-    this.player.sprite.chooseAnimation(STANDING_ANIMATION)
+    this.setPlayerAnimation(STANDING_ANIMATION)
     this.setGameSpeed(0)
   }
 

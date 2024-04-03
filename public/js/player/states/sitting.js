@@ -7,7 +7,7 @@ export class Sitting extends State {
     this.player.y = this.player.game.gameHeight - this.player.height
     this.player.speedX = 0
     this.player.speedY = 0
-    this.player.sprite.chooseAnimation(SITTING_ANIMATION)
+    this.setPlayerAnimation(SITTING_ANIMATION)
     this.setGameSpeed(0)
   }
 
