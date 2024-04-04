@@ -8,9 +8,10 @@ export class Sprite {
     this.animation = 0
     this.frame = 0
     this.nextFrameTime = 0
+    this.markForDeletion = false
   }
 
-  chooseAnimation (animation) {
+  setAnimation (animation) {
     this.animation = animation
     this.frame = 0
   }
@@ -22,11 +23,11 @@ export class Sprite {
     this.nextFrameTime = timestamp + 1000 / this.fps
   }
 
-  draw (context, x, y, width = undefined, height = undefined) {
+  draw (context, x = undefined, y = undefined, width = undefined, height = undefined) {
     context.drawImage(this.image,
       this.frame * this.frameWidth,
       this.animation * this.frameHeight,
       this.frameWidth, this.frameHeight,
-      x, y, (width ?? this.frameWidth), (height ?? this.frameHeight))
+      (x ?? this.x), (y ?? this.y), (width ?? this.frameWidth), (height ?? this.frameHeight))
   }
 }

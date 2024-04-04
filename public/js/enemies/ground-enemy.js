@@ -1,5 +1,5 @@
 import { Enemy } from './enemy.js'
-import { Sprite } from '../utils/sprite.js'
+import { Sprite } from '../animation/sprite.js'
 
 export class GroundEnemy extends Enemy {
   constructor (game) {

@@ -1,6 +1,6 @@
 import { State } from './state.js'
 import { DIVING_STATE, FALLING_STATE, ROLLING_STATE } from './states.js'
-import { JUMPING_ANIMATION } from '../player-sprite.js'
+import { JUMPING_ANIMATION } from '../../animation/player-sprite.js'
 
 export class Jumping extends State {
   enter () {
@@ -16,7 +16,7 @@ export class Jumping extends State {
   }
 
   handleInput (input) {
-    if (this.player.speedY > 0) return this.player.setState(FALLING_STATE)
+    if (this.player.speedY > 0) return this.setPlayerState(FALLING_STATE)
 
     super.handleInput(input)
   }

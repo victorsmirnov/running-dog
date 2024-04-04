@@ -1,6 +1,6 @@
 import { State } from './state.js'
 import { DIVING_STATE, FALLING_STATE, RUNNING_STATE } from './states.js'
-import { ROLLING_ANIMATION } from '../player-sprite.js'
+import { ROLLING_ANIMATION } from '../../animation/player-sprite.js'
 
 export class Rolling extends State {
   enter () {
@@ -19,7 +19,7 @@ export class Rolling extends State {
 
   handleInput (input) {
     if (!input.isKeyPressed('Enter')) {
-      return this.player.setState(
+      return this.setPlayerState(
         this.player.onGround() ? RUNNING_STATE : FALLING_STATE)
     }
 

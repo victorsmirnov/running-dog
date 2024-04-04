@@ -1,6 +1,6 @@
 import { State } from './state.js'
 import { JUMPING_STATE, ROLLING_STATE, RUNNING_STATE, SITTING_STATE } from './states.js'
-import { STANDING_ANIMATION } from '../player-sprite.js'
+import { STANDING_ANIMATION } from '../../animation/player-sprite.js'
 
 export class Standing extends State {
   enter () {

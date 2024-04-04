@@ -1,5 +1,5 @@
 import { Enemy } from './enemy.js'
-import { Sprite } from '../utils/sprite.js'
+import { Sprite } from '../animation/sprite.js'
 import { Circle } from '../collisions/circle.js'
 
 export class FlyingEnemy extends Enemy {

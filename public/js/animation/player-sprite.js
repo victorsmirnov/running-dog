@@ -1,4 +1,4 @@
-import { Sprite } from '../utils/sprite.js'
+import { Sprite } from './sprite.js'
 
 export const STANDING_ANIMATION = 0
 export const JUMPING_ANIMATION = 1

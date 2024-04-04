@@ -110,7 +110,7 @@ export class Game {
       .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
     if (collideWith.length > 0) this.playerCollidesWithEnemy()
 
-    collideWith.forEach((enemy) => { enemy.markForDeletion = true })
+    collideWith.forEach((enemy) => enemy.delete())
   }
 
   playerCollidesWithEnemy () {
@@ -122,10 +122,12 @@ export class Game {
   }
 
   addEnemy () {
-    this.enemies.push(new FlyingEnemy(this))
+    const fly = new FlyingEnemy(this)
+    this.enemies.push(fly)
+
     if (this.gameSpeed > 0) {
-      this.enemies.push(
-        Math.random() < 0.5 ? new GroundEnemy(this) : new ClimbingEnemy(this))
+      const enemy = Math.random() < 0.5 ? new GroundEnemy(this) : new ClimbingEnemy(this)
+      this.enemies.push(enemy)
     }
   }
 

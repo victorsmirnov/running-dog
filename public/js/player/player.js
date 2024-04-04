@@ -1,4 +1,4 @@
-import { PlayerSprite } from './player-sprite.js'
+import { PlayerSprite } from '../animation/player-sprite.js'
 import { STANDING_STATE } from './states/states.js'
 import { createStates } from './states/states-factory.js'
 import { Circle } from '../collisions/circle.js'

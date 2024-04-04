@@ -15,7 +15,11 @@ export class State {
   }
 
   setPlayerAnimation (animation) {
-    this.player.sprite.chooseAnimation(animation)
+    this.player.sprite.setAnimation(animation)
+  }
+
+  setPlayerState (state) {
+    this.player.setState(state)
   }
 
   get handlers () {
@@ -27,7 +31,8 @@ export class State {
       if (!input.isKeyPressed(key)) continue
 
       if (typeof handler === 'function') return handler(this.player, this.game)
-      return this.player.setState(handler)
+
+      return this.setPlayerState(handler)
     }
   }
 }

@@ -11,6 +11,11 @@ export class Enemy {
     this.markForDeletion = false
   }
 
+  delete () {
+    this.markForDeletion = true
+    this.sprite.markForDeletion = true
+  }
+
   draw (context) {
     this.sprite.draw(context, this.x, this.y, this.width, this.height)
 
