@@ -17,6 +17,7 @@ export class Sprite {
   }
 
   update (timestamp) {
+    if (this.nextFrameTime === 0) this.nextFrameTime = timestamp + 1000 / this.fps
     if (timestamp < this.nextFrameTime) return
 
     this.frame = (this.frame + 1) % this.frames[this.animation]

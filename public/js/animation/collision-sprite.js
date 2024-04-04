@@ -14,6 +14,8 @@ export class CollisionSprite extends Sprite {
 
   update (timestamp) {
     this.x -= this.game.gameSpeed
+
+    if (this.nextFrameTime === 0) this.nextFrameTime = timestamp + 1000 / this.fps
     if (timestamp < this.nextFrameTime) return
 
     this.frame = this.frame + 1
