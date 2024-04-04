@@ -2,7 +2,7 @@ import { Sprite } from './sprite.js'
 
 export class CollisionSprite extends Sprite {
   constructor (game, x, y) {
-    super(game.assets.boom, [5], 20)
+    super(game.assets.boom, [5], Math.random() * 10 + 5)
 
     this.game = game
     const sizeModifier = Math.random() + 0.5

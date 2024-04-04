@@ -16,9 +16,10 @@ export class Game {
     this.gamePaused = false
     this.gameOver = false
     this.gameScore = 0
+    this.gameStarted = 0
     this.gameSpeed = 0
     this.gameMaxSpeed = 5
-    this.groundMargin = 50
+    this.groundMargin = 40
 
     this.canvas = document.getElementById('canvas1')
     this.canvas.width = window.innerWidth // 1400 // parseInt(getComputedStyle(this.canvas).width)
@@ -27,7 +28,6 @@ export class Game {
 
     this.gameWidth = this.canvas.width
     this.gameHeight = this.canvas.height
-    this.fontColor = 'white'
 
     this.input = new InputHandler()
     this.player = new Player(this)
@@ -42,15 +42,21 @@ export class Game {
     this.player.setState(STANDING_STATE)
   }
 
+  get duration () {
+    return Date.now() - this.gameStarted
+  }
+
   setSpeed (speed) {
     this.gameSpeed = speed * this.gameMaxSpeed
   }
 
   start () {
+    this.gameStarted = Date.now()
     this.animate(0)
   }
 
   restart () {
+    this.gameStarted = Date.now()
     this.player.restart()
     this.background.restart()
     this.enemies = []
