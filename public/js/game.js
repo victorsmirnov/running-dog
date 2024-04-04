@@ -6,6 +6,7 @@ import { GroundEnemy } from './enemies/ground-enemy.js'
 import { ClimbingEnemy } from './enemies/climbing-enemy.js'
 import { Score } from './ui/score.js'
 import { DIVING_STATE, HIT_STATE, ROLLING_STATE, STANDING_STATE } from './player/states/states.js'
+import { CollisionSprite } from './animation/collision-sprite.js'
 
 export class Game {
   constructor (assets) {
@@ -31,6 +32,7 @@ export class Game {
     this.input = new InputHandler()
     this.player = new Player(this)
     this.enemies = []
+    this.sprites = []
     this.particles = []
     this.enemyNextTime = 0
     this.background = new Background(this)
@@ -74,6 +76,7 @@ export class Game {
     this.background.update()
     this.player.update(timestamp)
     this.updateEnemies(timestamp)
+    this.updateSprites(timestamp)
     this.updateParticles(timestamp)
   }
 
@@ -83,6 +86,7 @@ export class Game {
     this.background.draw(context)
     this.player.draw(context)
     this.enemies.forEach((enemy) => enemy.draw(context))
+    this.sprites.forEach((sprite) => sprite.draw(context))
     this.particles.forEach((particle) => particle.draw(context))
 
     this.scoreUI.draw(context)
@@ -110,6 +114,8 @@ export class Game {
       .filter((enemy) => playerShape.collides(enemy.getCollisionShape()))
     if (collideWith.length > 0) this.playerCollidesWithEnemy()
 
+    collideWith.forEach((enemy) => this.sprites.push(new CollisionSprite(
+      this, enemy.x + enemy.width / 2, enemy.y + enemy.height / 2)))
     collideWith.forEach((enemy) => enemy.delete())
   }
 
@@ -131,8 +137,13 @@ export class Game {
     }
   }
 
+  updateSprites (timestamp) {
+    this.sprites.forEach((sprite) => sprite.update(timestamp))
+    this.sprites = this.sprites.filter((sprite) => !sprite.markForDeletion)
+  }
+
   updateParticles (timestamp) {
-    this.particles.forEach((particle) => particle.update())
+    this.particles.forEach((particle) => particle.update(timestamp))
     this.particles = this.particles.filter((particle) => !particle.markForDeletion)
   }
 
