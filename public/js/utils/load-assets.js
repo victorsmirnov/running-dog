@@ -8,6 +8,7 @@ export async function loadAssets () {
   }
 
   await Promise.all([
+    loadAsset('boom', 'assets/boom.png'),
     loadAsset('enemy-fly', 'assets/enemy-fly.png'),
     loadAsset('enemy-plant', 'assets/enemy-plant.png'),
     loadAsset('enemy-spider-big', 'assets/enemy-spider-big.png'),
@@ -16,8 +17,8 @@ export async function loadAssets () {
     loadAsset('layer-3', 'assets/forest-3.png'),
     loadAsset('layer-4', 'assets/forest-4.png'),
     loadAsset('layer-5', 'assets/forest-5.png'),
-    loadAsset('player', 'assets/player.png'),
-    loadAsset('boom', 'assets/boom.png')
+    loadAsset('lives', 'assets/lives.png'),
+    loadAsset('player', 'assets/player.png')
   ])
 
   return assets

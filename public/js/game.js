@@ -16,6 +16,7 @@ export class Game {
     this.gamePaused = false
     this.gameOver = false
     this.gameScore = 0
+    this.gameLives = 5
     this.gameStarted = 0
     this.gameSpeed = 0
     this.gameMaxSpeed = 5
@@ -62,6 +63,7 @@ export class Game {
     this.enemies = []
     this.gameOver = false
     this.gameScore = 0
+    this.gameLives = 5
   }
 
   animate (timestamp) {
@@ -94,10 +96,7 @@ export class Game {
     this.enemies.forEach((enemy) => enemy.draw(context))
     this.sprites.forEach((sprite) => sprite.draw(context))
     this.particles.forEach((particle) => particle.draw(context))
-
     this.scoreUI.draw(context)
-    this.displayStatusText(context)
-    if (this.debugMode) this.displayDebugText(context)
   }
 
   updateEnemies (timestamp) {
@@ -110,7 +109,6 @@ export class Game {
 
     this.checkCollisions()
 
-    this.gameScore += this.enemies.filter((enemy) => enemy.markForDeletion).length
     this.enemies = this.enemies.filter((enemy) => !enemy.markForDeletion)
   }
 
@@ -130,6 +128,8 @@ export class Game {
       this.gameScore++
     } else {
       this.player.setState(HIT_STATE)
+      this.gameLives -= 1
+      this.gameOver = this.gameLives <= 0
     }
   }
 
@@ -151,37 +151,5 @@ export class Game {
   updateParticles (timestamp) {
     this.particles.forEach((particle) => particle.update(timestamp))
     this.particles = this.particles.filter((particle) => !particle.markForDeletion)
-  }
-
-  displayStatusText (context) {
-    if (this.gameOver) {
-      context.textAlign = 'center'
-      context.fillStyle = 'black'
-      context.font = '80px Helvetica'
-      context.fillText('Game Over', this.gameWidth / 2, this.gameHeight / 2)
-      context.fillStyle = 'white'
-      context.font = '80px Helvetica'
-      context.fillText('Game Over', this.gameWidth / 2 + 2, this.gameHeight / 2 + 2)
-    }
-  }
-
-  displayDebugText (context) {
-    context.textAlign = 'left'
-    context.fillStyle = 'black'
-    context.font = '40px Helvetica'
-    context.fillText(`Input: ${this.input.keys.join(', ')}`, this.gameWidth / 2, 50)
-    context.textAlign = 'left'
-    context.fillStyle = 'white'
-    context.font = '40px Helvetica'
-    context.fillText(`Input: ${this.input.keys.join(', ')}`, this.gameWidth / 2 + 2, 52)
-
-    context.textAlign = 'left'
-    context.fillStyle = 'black'
-    context.font = '40px Helvetica'
-    context.fillText(`State: ${this.player.state.constructor.name}`, this.gameWidth / 2, 90)
-    context.textAlign = 'left'
-    context.fillStyle = 'white'
-    context.font = '40px Helvetica'
-    context.fillText(`State: ${this.player.state.constructor.name}`, this.gameWidth / 2 + 2, 92)
   }
 }
